@@ -1,11 +1,12 @@
 import React from 'react';
-import { Type, List, DollarSign, MessageSquare, HelpCircle, Settings } from 'lucide-react';
+import { Type, List, DollarSign, MessageSquare, HelpCircle, Settings, Image } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AdminDashboard: React.FC = () => {
     const cards = [
         { title: 'Cabeçalho e Menu', desc: 'Logo, Links e Botões do topo.', icon: <List size={32} />, link: '/admin/header', color: 'bg-indigo-50 text-indigo-600' },
         { title: 'Hero & Textos', desc: 'Edite o título principal, textos e botões.', icon: <Type size={32} />, link: '/admin/hero', color: 'bg-blue-50 text-blue-600' },
+        { title: 'Banner de Slides', desc: 'Slider de imagens na seção Hero.', icon: <Image size={32} />, link: '/admin/banner-slides', color: 'bg-pink-50 text-pink-600' },
         { title: 'Diferenciais', desc: 'Gerencie a lista de funcionalidades e ícones.', icon: <List size={32} />, link: '/admin/features', color: 'bg-green-50 text-green-600' },
         { title: 'Planos e Preços', desc: 'Configure as tabelas de preços e planos.', icon: <DollarSign size={32} />, link: '/admin/pricing', color: 'bg-orange-50 text-orange-600' },
         { title: 'Depoimentos', desc: 'O que os clientes dizem.', icon: <MessageSquare size={32} />, link: '/admin/testimonials', color: 'bg-purple-50 text-purple-600' },

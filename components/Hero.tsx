@@ -7,7 +7,7 @@ const Hero: React.FC = () => {
   const { hero } = content;
 
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-brand-50">
+    <section className="relative pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden bg-brand-50" id="home">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-200/50 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-accent-200/50 blur-3xl"></div>
@@ -51,10 +51,11 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
+
         {/* Dynamic Image or Default CSS Mockup */}
-        <div className="mt-16 relative mx-auto max-w-6xl transform md:rotate-1 hover:rotate-0 transition-transform duration-500">
+        <div className="mt-16 relative mx-auto max-w-6xl">
           {hero.heroImage ? (
-            <div className="rounded-xl bg-gray-900 p-1.5 shadow-2xl ring-1 ring-gray-900/10">
+            <div className="rounded-xl bg-gray-900 p-1.5 shadow-2xl ring-1 ring-gray-900/10 transform md:rotate-1 hover:rotate-0 transition-transform duration-500">
               <img
                 src={hero.heroImage}
                 alt="Preview da Plataforma"
@@ -62,7 +63,7 @@ const Hero: React.FC = () => {
               />
             </div>
           ) : (
-            <div className="rounded-xl bg-gray-900 p-1.5 shadow-2xl ring-1 ring-gray-900/10">
+            <div className="rounded-xl bg-gray-900 p-1.5 shadow-2xl ring-1 ring-gray-900/10 transform md:rotate-1 hover:rotate-0 transition-transform duration-500">
               {/* Window Container */}
               <div className="rounded-lg bg-[#0F172A] w-full aspect-[16/9] flex overflow-hidden border border-gray-800">
 

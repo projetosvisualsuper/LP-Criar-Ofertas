@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { LayoutDashboard, Type, List, DollarSign, LogOut, Menu, X, MessageSquare, HelpCircle, Settings, Palette } from 'lucide-react';
+import { LayoutDashboard, Type, List, DollarSign, LogOut, Menu, X, MessageSquare, HelpCircle, Settings, Palette, Image } from 'lucide-react';
 import { Toaster } from 'react-hot-toast';
 
 const AdminLayout: React.FC = () => {
@@ -18,6 +18,7 @@ const AdminLayout: React.FC = () => {
         { name: 'Aparência (Tema)', path: '/admin/theme', icon: <Palette size={20} /> },
         { name: 'Cabeçalho e Menu', path: '/admin/header', icon: <Menu size={20} /> },
         { name: 'Hero (Capa)', path: '/admin/hero', icon: <Type size={20} /> },
+        { name: 'Banner de Slides', path: '/admin/banner-slides', icon: <Image size={20} /> },
         { name: 'Funcionalidades', path: '/admin/features', icon: <List size={20} /> },
         { name: 'Planos e Preços', path: '/admin/pricing', icon: <DollarSign size={20} /> },
         { name: 'Depoimentos', path: '/admin/testimonials', icon: <MessageSquare size={20} /> },

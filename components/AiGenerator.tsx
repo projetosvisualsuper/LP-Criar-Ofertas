@@ -19,7 +19,8 @@ const AiGenerator: React.FC = () => {
     setLoading(true);
     setGeneratedCopy('');
 
-    const text = await generateOfferCopy(product);
+    // Pass custom API Key if configured in admin
+    const text = await generateOfferCopy(product, aiGenerator.openaiApiKey);
 
     setGeneratedCopy(text);
     setLoading(false);

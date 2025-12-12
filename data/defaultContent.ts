@@ -27,7 +27,14 @@ export const defaultContent: SiteContent = {
         loginText: "Entrar",
         loginUrl: "https://criarofertas.com.br",
         ctaText: "Criar Encarte Grátis",
-        ctaUrl: "https://criarofertas.com.br"
+        ctaUrl: "https://criarofertas.com.br",
+        topBanner: {
+            show: false,
+            text: "",
+            linkText: "",
+            linkUrl: "",
+            backgroundColor: "#f97316"
+        }
     },
     hero: {
         badgeText: "Mais de 5.000 lojistas usam",

@@ -15,6 +15,7 @@ import TestimonialsForm from './pages/admin/TestimonialsForm';
 import FaqForm from './pages/admin/FaqForm';
 import HeaderForm from './pages/admin/HeaderForm';
 import ThemeForm from './pages/admin/ThemeForm';
+import BannerSlidesForm from './pages/admin/BannerSlidesForm';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/admin/theme" element={<ThemeForm />} />
               <Route path="/admin/header" element={<HeaderForm />} />
               <Route path="/admin/hero" element={<HeroForm />} />
+              <Route path="/admin/banner-slides" element={<BannerSlidesForm />} />
               <Route path="/admin/features" element={<FeaturesForm />} />
               <Route path="/admin/pricing" element={<PricingForm />} />
               <Route path="/admin/testimonials" element={<TestimonialsForm />} />

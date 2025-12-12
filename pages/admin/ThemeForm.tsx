@@ -1,9 +1,10 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useContent } from '../../context/ContentContext';
 import { ThemeContent, ThemeColors } from '../../types';
+import { templates, ThemeTemplate } from '../../data/templates';
 import toast from 'react-hot-toast';
-import { Palette, Type } from 'lucide-react';
+import { Palette, Type, LayoutTemplate, Check } from 'lucide-react';
 
 const ThemeForm: React.FC = () => {
     const { content, updateContent } = useContent();
@@ -22,13 +23,22 @@ const ThemeForm: React.FC = () => {
         fontFamily: 'Inter'
     };
 
-    const { register, control, handleSubmit, watch, formState: { isSubmitting } } = useForm<ThemeContent>({
+    const { register, handleSubmit, watch, setValue, formState: { isSubmitting, isDirty } } = useForm<ThemeContent>({
         defaultValues: currentTheme
     });
 
     const onSubmit = async (data: ThemeContent) => {
         await updateContent('theme', data);
         toast.success('Tema atualizado com sucesso! As alterações são aplicadas instantaneamente.');
+    };
+
+    const applyTemplate = (template: ThemeTemplate) => {
+        setValue('colors', template.colors, { shouldDirty: true });
+        setValue('fontFamily', template.fontFamily, { shouldDirty: true });
+        if (template.favicon) {
+            setValue('favicon', template.favicon, { shouldDirty: true });
+        }
+        toast.success(`Template "${template.name}" aplicado! Clique em "Salvar" para confirmar.`);
     };
 
     const fontOptions = [
@@ -54,11 +64,67 @@ const ThemeForm: React.FC = () => {
         accent600: 'Destaque Principal (Ex: Elementos de chama atenção)',
     };
 
+    // Helper to detect if current form matches a template
+    const currentColors = watch('colors');
+    const currentFont = watch('fontFamily');
+
+    const activeTemplateId = templates.find(t =>
+        JSON.stringify(t.colors) === JSON.stringify(currentColors) &&
+        t.fontFamily === currentFont
+    )?.id;
+
     return (
         <div className="max-w-4xl mx-auto space-y-10">
             <h1 className="text-2xl font-bold text-gray-900">Personalização Visual (Tema)</h1>
 
+            {/* Templates Section */}
+            <div className="space-y-4">
+                <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+                    <LayoutTemplate size={20} className="text-brand-600" />
+                    Templates Profissionais
+                </h2>
+                <p className="text-gray-600">Escolha um estilo pré-definido para transformar instantaneamente o visual da sua página.</p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {templates.map((template) => {
+                        const isActive = activeTemplateId === template.id;
+                        return (
+                            <button
+                                key={template.id}
+                                onClick={() => applyTemplate(template)}
+                                type="button"
+                                className={`relative text-left p-4 rounded-xl border-2 transition-all hover:scale-[1.02] active:scale-[0.98] ${isActive
+                                        ? 'border-brand-600 bg-brand-50 shadow-md ring-1 ring-brand-600'
+                                        : 'border-gray-200 bg-white hover:border-brand-300 hover:shadow-sm'
+                                    }`}
+                            >
+                                <div className="flex items-center justify-between mb-3">
+                                    <div
+                                        className="w-12 h-12 rounded-full shadow-inner flex items-center justify-center"
+                                        style={{ backgroundColor: template.previewColor }}
+                                    >
+                                        {isActive && <Check className="text-white" size={24} />}
+                                    </div>
+                                    <span className="text-xs font-mono bg-gray-100 px-2 py-1 rounded text-gray-500">
+                                        {template.fontFamily}
+                                    </span>
+                                </div>
+                                <h3 className="font-bold text-gray-900">{template.name}</h3>
+                                <p className="text-sm text-gray-500 mt-1 leading-snug">{template.description}</p>
+                            </button>
+                        );
+                    })}
+                </div>
+            </div>
+
+            <div className="border-t border-gray-200" />
+
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+
+                <div className="flex items-center justify-between">
+                    <h2 className="text-xl font-bold text-gray-800">Ajustes Finos</h2>
+                    {isDirty && <span className="text-sm text-amber-600 font-medium">Você tem alterações não salvas</span>}
+                </div>
 
                 {/* Typography Section */}
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-6">
@@ -167,5 +233,4 @@ const ThemeForm: React.FC = () => {
         </div>
     );
 };
-
 export default ThemeForm;

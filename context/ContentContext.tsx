@@ -107,6 +107,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }, []);
 
     const updateContent = async (section: keyof SiteContent, data: any) => {
+        console.log(`[ContentContext] Updating section: ${section}`, data);
+
         // 1. Optimistic Update
         setContent((prev) => ({
             ...prev,
@@ -114,6 +116,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
         }));
 
         // 2. Persist to Supabase
+        console.log(`[ContentContext] Saving to database...`);
         const { error } = await supabase
             .from('site_content')
             .upsert({ id: section, content: data, updated_at: new Date() });
@@ -122,6 +125,8 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
             console.error(`Error updating ${section}:`, error);
             // Revert if needed (omitted for simplicity, but good practice)
             alert('Erro ao salvar no banco de dados. Verifique suas credenciais.');
+        } else {
+            console.log(`[ContentContext] Successfully saved ${section} to database!`);
         }
     };
 

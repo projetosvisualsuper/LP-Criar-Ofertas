@@ -26,17 +26,6 @@ export interface Testimonial {
   text: string;
 }
 
-export interface HeroContent {
-  badgeText: string;
-  title: string;
-  titleHighlight: string;
-  description: string;
-  ctaPrimary: string;
-  ctaSecondary: string;
-  benefits: string[];
-  heroImage?: string;
-}
-
 export interface AiGeneratorContent {
   title: string;
   subtitle: string;
@@ -61,6 +50,14 @@ export interface HeaderContent {
   loginUrl: string;
   ctaText: string;
   ctaUrl: string;
+  variant?: 'default' | 'centered' | 'minimal' | 'dark' | 'glass';
+  topBanner?: {
+    show: boolean;
+    text: string;
+    linkText?: string;
+    linkUrl?: string;
+    backgroundColor?: string;
+  };
 }
 
 export interface FooterLink {
@@ -98,6 +95,28 @@ export interface HowItWorksContent {
   title: string;
   subtitle: string;
   steps: Step[];
+}
+
+export interface BannerSlide {
+  id: string;
+  imageUrl: string;
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaUrl?: string;
+}
+
+export interface HeroContent {
+  badgeText: string;
+  title: string;
+  titleHighlight: string;
+  description: string;
+  ctaPrimary: string;
+  ctaSecondary: string;
+  benefits: string[];
+  heroImage?: string;
+  bannerSlides?: BannerSlide[];
+  showBannerSlider?: boolean;
 }
 
 export interface ThemeColors {

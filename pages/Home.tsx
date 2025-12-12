@@ -5,6 +5,7 @@ import Features from '../components/Features';
 import AiGenerator from '../components/AiGenerator';
 import Pricing from '../components/Pricing';
 import Footer from '../components/Footer';
+import BannerSlider from '../components/BannerSlider';
 import { ArrowUp } from 'lucide-react';
 import { useContent } from '../context/ContentContext';
 
@@ -35,6 +36,15 @@ const Home: React.FC = () => {
     return (
         <div className="min-h-screen bg-white font-sans antialiased selection:bg-brand-200 selection:text-brand-900 relative">
             <Header />
+
+
+            {/* Banner Slider - Between Header and Hero */}
+            {content.hero.showBannerSlider && content.hero.bannerSlides && content.hero.bannerSlides.length > 0 && (
+                <section className="pt-28 md:pt-32">
+                    <BannerSlider slides={content.hero.bannerSlides} />
+                </section>
+            )}
+
             <main>
                 <Hero />
                 <Features />
